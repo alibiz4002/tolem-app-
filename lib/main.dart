@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_app/pages/my_home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   
         primarySwatch: Colors.blue,
       ),
-      home:  Container()
+      home: const   MyHomeView(),
     );
   }
 }
