@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:payment_app/pages/my_home_view.dart';
 
+import 'pages/paymet_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,13 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomeView(),
+      home: PaymentPage(),
     );
   }
 }

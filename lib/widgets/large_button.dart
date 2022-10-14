@@ -26,7 +26,7 @@ class LargeButtonWigdet extends StatelessWidget {
         decoration: BoxDecoration(
             color: backgroundcolor,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(width: 2, color: Appcolors.mainColor)),
+            border: Border.all(width: 2, color: AppColors.mainColor)),
         child: Center(
           child: Text(
             text,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_app/widgets/buttons.dart';
 
 import '../compenents/colors.dart';
 import '../widgets/large_button.dart';
@@ -18,7 +19,7 @@ class _MyHomeViewState extends State<MyHomeView> {
     double w = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Appcolors.backGroundColor,
+      backgroundColor: AppColors.backGroundColor,
       body: Container(
         height: h,
         child: Stack(
@@ -40,22 +41,98 @@ class _MyHomeViewState extends State<MyHomeView> {
           _mainBackgound(),
           _curveImageContainer(),
           _buttonContainer(),
+          _textContainer(),
         ],
       ),
     );
   }
 
-  _payButton() {
-    return const Positioned(
-    
-      bottom: 10,
-      child: LargeButtonWigdet(
-        // onTap:() {
-
-        // },
-        text: 'Pay all bills', textcolor: Colors.white,
-      ),
-    );
+  _buttonContainer() {
+    return Positioned(
+        // left: 0,
+        right: 43,
+        bottom: 25,
+        child: GestureDetector(
+          onTap: () {
+            showModalBottomSheet<dynamic>(
+                isScrollControlled: true,
+                barrierColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (BuildContext bc) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height - 230,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                            bottom: 0,
+                            child: Container(
+                              color: Color(0xFFeef1f4).withOpacity(0.7),
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height - 290,
+                            )),
+                        Positioned(
+                            top: 0,
+                            right: 45,
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.only(top: 5, bottom: 25),
+                              width: 60,
+                              height: 260,
+                              decoration: BoxDecoration(
+                                  color: AppColors.mainColor,
+                                  borderRadius: BorderRadius.circular(29)),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Appbuttons(
+                                    icon: Icons.cancel,
+                                    iconColor: AppColors.mainColor,
+                                    textColor: Colors.white,
+                                    backgroundColor: Colors.white,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  Appbuttons(
+                                      icon: Icons.add,
+                                      iconColor: AppColors.mainColor,
+                                      textColor: Colors.white,
+                                      backgroundColor: Colors.white,
+                                      onTap: () {},
+                                      text: 'Add Bill'),
+                                  Appbuttons(
+                                      icon: Icons.history,
+                                      iconColor: AppColors.mainColor,
+                                      textColor: Colors.white,
+                                      backgroundColor: Colors.white,
+                                      onTap: () {},
+                                      text: 'History'),
+                                ],
+                              ),
+                            ))
+                      ],
+                    ),
+                  );
+                });
+          },
+          child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                  fit: BoxFit.fitHeight,
+                  image: AssetImage('assets/images/lines.png')),
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 15,
+                    offset: Offset(0, 1),
+                    color: AppColors.menuButtonColor.withOpacity(0.2))
+              ],
+            ),
+          ),
+        ));
   }
 
   _mainBackgound() {
@@ -69,7 +146,7 @@ class _MyHomeViewState extends State<MyHomeView> {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/images/background.png'))),
-        ));
+        ),);
   }
 
   _curveImageContainer() {
@@ -83,29 +160,6 @@ class _MyHomeViewState extends State<MyHomeView> {
               image: DecorationImage(
                   fit: BoxFit.fitHeight,
                   image: AssetImage('assets/images/curve.png'))),
-        ));
-  }
-
-  _buttonContainer() {
-    return Positioned(
-        // left: 0,
-        right: 43,
-        bottom: 25,
-        child: Container(
-          height: 60,
-          width: 60,
-          // height: MediaQuery.of(context).size.height * 0.14,
-          decoration: BoxDecoration(
-            image: const DecorationImage(
-                fit: BoxFit.fitHeight,
-                image: AssetImage('assets/images/lines.png')),
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 15,
-                  offset: Offset(0, 1),
-                  color: Appcolors.menuButtonColor.withOpacity(0.2))
-            ],
-          ),
         ));
   }
 
@@ -134,7 +188,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                        color: Appcolors.billShodowColor,
+                        color: AppColors.billShodowColor,
                         offset: const Offset(1, 1),
                         blurRadius: 20.0,
                         spreadRadius: 10),
@@ -169,7 +223,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                                     'Kengen Power',
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color: Appcolors.mainColor,
+                                        color: AppColors.mainColor,
                                         fontWeight: FontWeight.w700),
                                   ),
                                   SizedBox(height: 10),
@@ -177,7 +231,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                                     'ID: 846594',
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color: Appcolors.idColor,
+                                        color: AppColors.idColor,
                                         fontWeight: FontWeight.w700),
                                   ),
                                 ],
@@ -201,13 +255,13 @@ class _MyHomeViewState extends State<MyHomeView> {
                                 height: 30,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
-                                    color: Appcolors.selectBackground),
+                                    color: AppColors.selectBackground),
                                 child: Center(
                                   child: Text(
                                     'Select',
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color: Appcolors.selectcolor),
+                                        color: AppColors.selectcolor),
                                   ),
                                 ),
                               ),
@@ -217,14 +271,14 @@ class _MyHomeViewState extends State<MyHomeView> {
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w900,
-                                    color: Appcolors.mainColor),
+                                    color: AppColors.mainColor),
                               ),
                               Text(
                                 'Due in 3 days',
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
-                                    color: Appcolors.idColor),
+                                    color: AppColors.idColor),
                               ),
                               SizedBox(height: 10),
                             ],
@@ -234,7 +288,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                             width: 5,
                             height: 35,
                             decoration: BoxDecoration(
-                                color: Appcolors.halfOval,
+                                color: AppColors.halfOval,
                                 borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(30),
                                   bottomLeft: Radius.circular(30),
@@ -248,6 +302,44 @@ class _MyHomeViewState extends State<MyHomeView> {
           },
         ),
       ),
+    );
+  }
+
+  _payButton() {
+    return const Positioned(
+      bottom: 10,
+      child: LargeButtonWigdet(
+        text: 'Pay all bills',
+        textcolor: Colors.white,
+      ),
+    );
+    
+  }
+
+  _textContainer() {
+    return Stack(
+      children: const  [
+         Positioned(
+            left: 0,
+            top: 100,
+            child: Text(
+              'My Bills',
+              style: TextStyle(
+                  fontSize: 70,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF293952)),
+            ),),
+         Positioned(
+            left: 40,
+            top: 80,
+            child: Text(
+              'My Bills',
+              style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )),
+      ],
     );
   }
 }
