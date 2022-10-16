@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:payment_app/compenents/colors.dart';
 import 'package:payment_app/widgets/buttons.dart';
+import 'package:payment_app/widgets/large_button.dart';
+import 'package:get/get.dart';
 
 class PaymentPage extends StatelessWidget {
   PaymentPage({super.key});
@@ -141,7 +143,7 @@ class PaymentPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: h * 0.13),
+              SizedBox(height: h * 0.14),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -152,7 +154,7 @@ class PaymentPage extends StatelessWidget {
                     textColor: AppColors.mainColor,
                     backgroundColor: AppColors.mainColor,
                   ),
-                  SizedBox(width: h * 0.14),
+                  SizedBox(width: 80),
                   Appbuttons(
                       icon: Icons.print_outlined,
                       onTap: () {},
@@ -160,7 +162,16 @@ class PaymentPage extends StatelessWidget {
                       textColor: AppColors.mainColor,
                       backgroundColor: AppColors.mainColor),
                 ],
-              )
+              ),
+              SizedBox(height: h * 0.02),
+              LargeButtonWidget(
+                text: 'Done',
+                backgroundcolor: Colors.white,
+                textcolor: AppColors.mainColor,
+                onTap: () {
+                  Get.back();
+                },
+              ),
             ],
           )),
     );

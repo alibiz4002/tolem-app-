@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:payment_app/compenents/colors.dart';
 
-class LargeButtonWigdet extends StatelessWidget {
+class LargeButtonWidget extends StatelessWidget {
   final Color? backgroundcolor;
   final Color? textcolor;
   final Function()? onTap;
   final String text;
   final bool? isBorder;
-  const LargeButtonWigdet(
+  const LargeButtonWidget(
       {super.key,
       this.backgroundcolor = const Color.fromARGB(255, 20, 62, 96),
       this.textcolor,
@@ -31,7 +31,7 @@ class LargeButtonWigdet extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 40, color: textcolor),
+                fontWeight: FontWeight.bold, fontSize: 30, color: textcolor),
           ),
         ),
       ),

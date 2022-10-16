@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:payment_app/pages/paymet_page.dart';
 import 'package:payment_app/widgets/buttons.dart';
-
+import 'package:get/get.dart';
 import '../compenents/colors.dart';
 import '../widgets/large_button.dart';
 import '../widgets/text_size.dart';
@@ -137,16 +138,17 @@ class _MyHomeViewState extends State<MyHomeView> {
 
   _mainBackgound() {
     return Positioned(
-        bottom: 10,
-        left: 0,
-        child: Container(
-          height: 300,
-          width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/background.png'))),
-        ),);
+      bottom: 10,
+      left: 0,
+      child: Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/background.png'))),
+      ),
+    );
   }
 
   _curveImageContainer() {
@@ -306,30 +308,33 @@ class _MyHomeViewState extends State<MyHomeView> {
   }
 
   _payButton() {
-    return const Positioned(
+    return Positioned(
       bottom: 10,
-      child: LargeButtonWigdet(
+      child: LargeButtonWidget(
         text: 'Pay all bills',
         textcolor: Colors.white,
+        onTap: () {
+          Get.to(() => PaymentPage());
+        },
       ),
     );
-    
   }
 
   _textContainer() {
     return Stack(
-      children: const  [
-         Positioned(
-            left: 0,
-            top: 100,
-            child: Text(
-              'My Bills',
-              style: TextStyle(
-                  fontSize: 70,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF293952)),
-            ),),
-         Positioned(
+      children: const [
+        Positioned(
+          left: 0,
+          top: 100,
+          child: Text(
+            'My Bills',
+            style: TextStyle(
+                fontSize: 70,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF293952)),
+          ),
+        ),
+        Positioned(
             left: 40,
             top: 80,
             child: Text(
