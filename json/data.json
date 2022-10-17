@@ -1,0 +1,32 @@
+[
+    {
+        "brand": "KenGen Power",
+        "date": "12-01-08",
+        "status": false,
+        "price": 1280.00,
+        "more": "Pay before",
+        "id": 895745,
+        "due" :"due in 1 weeks",
+        "img": "assets/images/brand1.png"
+    },
+    {
+        "brand": "Tech Power",
+        "date": "11-11-08",
+        "status": false,
+        "price": 3280.00,
+        "more": "You must pay now",
+        "id": 883645,
+        "due" :"due in 5 days",
+        "img": "assets/images/brand2.png"
+    }, 
+    {
+        "brand": "Airtel Power",
+        "date": "10-01-15",
+        "status": false,
+        "price": 1560.30,
+        "more": "Due is now",
+        "id": 776458,
+        "due" :"due in 2 weeks",
+        "img": "assets/images/brand3.png"
+    }
+]

@@ -5,7 +5,7 @@ import 'package:payment_app/widgets/large_button.dart';
 import 'package:get/get.dart';
 
 class PaymentPage extends StatelessWidget {
-  PaymentPage({super.key});
+ const  PaymentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,64 +60,62 @@ class PaymentPage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: 3,
                     itemBuilder: (context, index) {
-                      return Container(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      top: 15, left: 20, bottom: 10),
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
-                                      color: Colors.green),
-                                  child: const Icon(Icons.done,
-                                      size: 30, color: Colors.white),
-                                ),
-                                const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'KenGen Power ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.mainColor),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      'ID:7834874',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.idColor),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(width: 20),
-                                Column(
-                                  children: [
-                                    const SizedBox(height: 30),
-                                    Text(
-                                      '\$1248.00 ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppColors.mainColor),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              thickness: 2,
-                              color: Colors.grey.withOpacity(0.5),
-                            )
-                          ],
-                        ),
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    top: 15, left: 20, bottom: 10),
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: Colors.green),
+                                child: const Icon(Icons.done,
+                                    size: 30, color: Colors.white),
+                              ),
+                              const SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'KenGen Power ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.mainColor),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'ID:7834874',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.idColor),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const SizedBox(height: 30),
+                                  Text(
+                                    '\$1248.00 ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppColors.mainColor),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            thickness: 2,
+                            color: Colors.grey.withOpacity(0.5),
+                          )
+                        ],
                       );
                     },
                   ),
@@ -133,7 +131,7 @@ class PaymentPage extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: AppColors.idColor),
                   ),
-                  SizedBox(height: 5),
+                const   SizedBox(height: 5),
                   Text(
                     '\$2840.00',
                     style: TextStyle(
@@ -154,7 +152,7 @@ class PaymentPage extends StatelessWidget {
                     textColor: AppColors.mainColor,
                     backgroundColor: AppColors.mainColor,
                   ),
-                  SizedBox(width: 80),
+               const    SizedBox(width: 80),
                   Appbuttons(
                       icon: Icons.print_outlined,
                       onTap: () {},

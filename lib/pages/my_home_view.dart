@@ -3,6 +3,7 @@ import 'package:payment_app/pages/paymet_page.dart';
 import 'package:payment_app/widgets/buttons.dart';
 import 'package:get/get.dart';
 import '../compenents/colors.dart';
+import '../controller/data.controller.dart';
 import '../widgets/large_button.dart';
 import '../widgets/text_size.dart';
 
@@ -14,19 +15,34 @@ class MyHomeView extends StatefulWidget {
 }
 
 class _MyHomeViewState extends State<MyHomeView> {
+  final DataController controller = Get.put(DataController());
   @override
   Widget build(BuildContext context) {
+    print('i am testing ${controller.list} is empty');
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColors.backGroundColor,
-      body: Container(
+      body: SizedBox(
         height: h,
         child: Stack(
           children: [
             _headSection(),
-            _listBills(),
+            Obx(() {
+              if (controller.loading == false) {
+                return Center(
+                    child: Container(
+                        width: 70,
+                        height: 70,
+                        child: CircularProgressIndicator(
+                          color: AppColors.mainColor,
+                        )));
+              } else {
+                return _listBills();
+              }
+              ;
+            }),
             _payButton(),
           ],
         ),
@@ -35,7 +51,7 @@ class _MyHomeViewState extends State<MyHomeView> {
   }
 
   _headSection() {
-    return Container(
+    return SizedBox(
       height: 310,
       child: Stack(
         children: [
@@ -61,14 +77,14 @@ class _MyHomeViewState extends State<MyHomeView> {
                 backgroundColor: Colors.transparent,
                 context: context,
                 builder: (BuildContext bc) {
-                  return Container(
+                  return SizedBox(
                     height: MediaQuery.of(context).size.height - 230,
                     child: Stack(
                       children: [
                         Positioned(
                             bottom: 0,
                             child: Container(
-                              color: Color(0xFFeef1f4).withOpacity(0.7),
+                              color: const Color(0xFFeef1f4).withOpacity(0.7),
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height - 290,
                             )),
@@ -128,7 +144,7 @@ class _MyHomeViewState extends State<MyHomeView> {
               boxShadow: [
                 BoxShadow(
                     blurRadius: 15,
-                    offset: Offset(0, 1),
+                    offset: const Offset(0, 1),
                     color: AppColors.menuButtonColor.withOpacity(0.2))
               ],
             ),
@@ -175,7 +191,7 @@ class _MyHomeViewState extends State<MyHomeView> {
         removeTop: true,
         context: context,
         child: ListView.builder(
-          itemCount: 3,
+          itemCount: controller.list.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return Container(
@@ -201,6 +217,7 @@ class _MyHomeViewState extends State<MyHomeView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -212,25 +229,25 @@ class _MyHomeViewState extends State<MyHomeView> {
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
                                         width: 3, color: Colors.grey),
-                                    image: const DecorationImage(
+                                    image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: AssetImage(
-                                            'assets/images/brand1.png'))),
+                                            controller.list[index]['img']))),
                               ),
                               const SizedBox(width: 10),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Kengen Power',
+                                    controller.list[index]['brand'],
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: AppColors.mainColor,
                                         fontWeight: FontWeight.w700),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    'ID: 846594',
+                                    'ID:${controller.list[index]['id'].toString()}',
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: AppColors.idColor,
@@ -240,11 +257,11 @@ class _MyHomeViewState extends State<MyHomeView> {
                               ),
                             ],
                           ),
-                          const TextSizeWidget(
-                            text: 'Auto pay on 24th May 18',
+                          TextSizeWidget(
+                            text: controller.list[index]['more'],
                             color: Colors.green,
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                         ],
                       ),
                       Row(
@@ -252,40 +269,56 @@ class _MyHomeViewState extends State<MyHomeView> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 80,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: AppColors.selectBackground),
-                                child: Center(
-                                  child: Text(
-                                    'Select',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: AppColors.selectcolor),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.list[index]['status'] =
+                                      !controller.list[index]['status'];
+                                  print(controller.list[index]['status']);
+                                  controller.list.refresh();
+                                  print(controller.newList.length);
+                                },
+                                child: Container(
+                                  width: 80,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: controller.list[index]['status'] ==
+                                              false
+                                          ? AppColors.selectBackground
+                                          : AppColors.mainColor),
+                                  child: Center(
+                                    child: Text(
+                                      'Select',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: controller.list[index]
+                                                      ['status'] ==
+                                                  false
+                                              ? AppColors.selectcolor
+                                              : Colors.white),
+                                    ),
                                   ),
                                 ),
                               ),
                               Expanded(child: Container()),
                               Text(
-                                '\$1248.00',
+                                '\$${controller.list[index]['price']}',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w900,
                                     color: AppColors.mainColor),
                               ),
                               Text(
-                                'Due in 3 days',
+                                controller.list[index]['due'],
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.idColor),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                             ],
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Container(
                             width: 5,
                             height: 35,
@@ -314,7 +347,7 @@ class _MyHomeViewState extends State<MyHomeView> {
         text: 'Pay all bills',
         textcolor: Colors.white,
         onTap: () {
-          Get.to(() => PaymentPage());
+          Get.to(() => const PaymentPage());
         },
       ),
     );
